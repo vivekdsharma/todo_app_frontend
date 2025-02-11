@@ -94,3 +94,33 @@ function logout() {
     localStorage.removeItem("token");
     window.location.href = "index.html"; // Redirect to login page
 }
+
+
+// ✅ Add new task
+async function addTask() {
+    const title = document.getElementById("task-input").value;
+    const token = localStorage.getItem("token");
+
+    if (!title) {
+        alert("Task title is required!");
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_BASE_URL}/api/tasks`, { // 🔹 Updated API path
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ title })
+        });
+
+        const newTask = await res.json();
+        console.log("New Task Added:", newTask);
+        fetchTasks(); // Refresh task list
+        document.getElementById("task-input").value = ""; // Clear input
+    } catch (error) {
+        console.error("Error adding task:", error);
+    }
+}
