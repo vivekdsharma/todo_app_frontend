@@ -1,11 +1,21 @@
 const API_BASE_URL = "https://todo-app-backend-rcu5.onrender.com"; // Backend API URL
 
-// ✅ Fetch tasks from backend (Updated API path)
+// ✅ Check if user is logged in
+document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        window.location.href = "index.html"; // Redirect to login page
+    } else {
+        fetchTasks(); // Fetch tasks when logged in
+    }
+});
+
+// ✅ Fetch tasks from backend
 async function fetchTasks() {
     const token = localStorage.getItem("token");
 
     try {
-        const res = await fetch(`${API_BASE_URL}/api/tasks`, { // 🔹 Updated path
+        const res = await fetch(`${API_BASE_URL}/api/tasks`, { // 🔹 Updated API path
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -15,47 +25,34 @@ async function fetchTasks() {
 
         const tasks = await res.json();
         console.log("Fetched Tasks:", tasks);
-        displayTasks(tasks);
+        displayTasks(tasks); // 🔹 Ensure function is defined before calling
     } catch (error) {
         console.error("Error fetching tasks:", error);
     }
 }
 
-// ✅ Add new task (Updated API path)
-async function addTask() {
-    const title = document.getElementById("task-input").value;
-    const token = localStorage.getItem("token");
+// ✅ Display tasks in HTML
+function displayTasks(tasks) {
+    const taskList = document.getElementById("task-list");
+    taskList.innerHTML = ""; // Clear existing tasks
 
-    if (!title) {
-        alert("Task title is required!");
-        return;
-    }
-
-    try {
-        const res = await fetch(`${API_BASE_URL}/api/tasks`, { // 🔹 Updated path
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ title })
-        });
-
-        const newTask = await res.json();
-        console.log("New Task Added:", newTask);
-        fetchTasks(); // Refresh task list
-        document.getElementById("task-input").value = ""; // Clear input
-    } catch (error) {
-        console.error("Error adding task:", error);
-    }
+    tasks.forEach(task => {
+        const taskItem = document.createElement("li");
+        taskItem.innerHTML = `
+            <span class="${task.completed ? 'completed' : ''}">${task.title}</span>
+            <button onclick="toggleTask('${task._id}')">${task.completed ? 'Undo' : 'Complete'}</button>
+            <button onclick="deleteTask('${task._id}')">Delete</button>
+        `;
+        taskList.appendChild(taskItem);
+    });
 }
 
-// ✅ Toggle task completion (Updated API path)
+// ✅ Toggle task completion
 async function toggleTask(taskId) {
     const token = localStorage.getItem("token");
 
     try {
-        const res = await fetch(`${API_BASE_URL}/api/tasks/${taskId}`, { // 🔹 Updated path
+        const res = await fetch(`${API_BASE_URL}/api/tasks/${taskId}`, { // 🔹 Updated API path
             method: "PUT",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -71,12 +68,12 @@ async function toggleTask(taskId) {
     }
 }
 
-// ✅ Delete task (Updated API path)
+// ✅ Delete task
 async function deleteTask(taskId) {
     const token = localStorage.getItem("token");
 
     try {
-        const res = await fetch(`${API_BASE_URL}/api/tasks/${taskId}`, { // 🔹 Updated path
+        const res = await fetch(`${API_BASE_URL}/api/tasks/${taskId}`, { // 🔹 Updated API path
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -90,4 +87,10 @@ async function deleteTask(taskId) {
     } catch (error) {
         console.error("Error deleting task:", error);
     }
+}
+
+// ✅ Logout user
+function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "index.html"; // Redirect to login page
 }
