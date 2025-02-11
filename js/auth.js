@@ -13,6 +13,8 @@ function toggleForm() {
         document.getElementById("submit-btn").setAttribute("onclick", "login()");
         document.getElementById("form-footer").innerHTML = "Don't have an account?";
         document.getElementById("toggle-form").innerText = "Signup";
+        document.getElementById("heading_left").innerText = "Welcome Back";
+        document.getElementById("para_left").innerText = "Nice to see you again";
     } else {
         document.getElementById("form-title").innerText = "Signup";
         document.getElementById("signup-fields").style.display = "block";
@@ -20,6 +22,8 @@ function toggleForm() {
         document.getElementById("submit-btn").setAttribute("onclick", "signup()");
         document.getElementById("form-footer").innerHTML = "Already have an account?";
         document.getElementById("toggle-form").innerText = "Login";
+        document.getElementById("heading_left").innerText = "Welcome aboard!";
+        document.getElementById("para_left").innerText = "Let's make something great together.";
     }
 }
 

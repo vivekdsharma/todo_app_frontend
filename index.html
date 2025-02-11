@@ -7,28 +7,28 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1 id="form-title">Signup</h1>
-        
-        <!-- Form Fields -->
-        <div id="signup-fields">
-            <input type="text" id="name" placeholder="Enter Name">
-            <input type="text" id="phone" placeholder="Enter Phone Number">
+    <div class="bigContainer">
+        <div class="left">
+            <h2 id="heading_left">Welcome aboard!</h2>
+            <p id="para_left">Let's make something great together.</p>
         </div>
-        
-        <input type="text" id="email" placeholder="Enter Email">
-        <input type="password" id="password" placeholder="Enter Password">
-
-        <!-- Buttons -->
-        <button id="submit-btn" onclick="signup()">Signup</button>
-        <p>
-            <span id="form-footer">Already have an account? </span>
-            <a href="#" id="toggle-form" onclick="toggleForm()">Login</a>
-        </p>
-        
-        <p id="message"></p>
+        <div class="right">
+            <div class="container">
+                <h1 id="form-title">Signup</h1>
+                <div id="signup-fields">
+                    <input type="text" id="name" placeholder="Enter Name">
+                    <input type="text" id="phone" placeholder="Enter Phone Number">
+                </div>
+                <input type="text" id="email" placeholder="Enter Email">
+                <input type="password" id="password" placeholder="Enter Password">
+                <button id="submit-btn" onclick="signup()">Signup</button>
+                <p><span id="form-footer">Already have an account? </span>
+                    <a href="#" id="toggle-form" onclick="toggleForm()">Login</a>
+                </p>
+                <p id="message"></p>
+            </div>
+        </div>
     </div>
-
     <script src="js/auth.js"></script>
 </body>
 </html>
