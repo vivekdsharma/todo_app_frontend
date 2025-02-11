@@ -27,6 +27,16 @@ function toggleForm() {
     }
 }
 
+
+function showPopup() {
+    document.getElementById("overlay").style.display = "block";
+    document.getElementById("popup").style.display = "block";
+}
+
+function closePopup() {
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("popup").style.display = "none";
+}
 // ✅ Signup Function (Updated API path)
 async function signup() {
     const name = document.getElementById("name").value;
@@ -49,7 +59,7 @@ async function signup() {
     document.getElementById("message").innerText = data.message;
 
     if (response.ok) {
-        alert("Signup successful! Please login.");
+        showPopup();
         toggleForm(); // Switch to Login mode after successful signup
     }
 }
@@ -87,13 +97,5 @@ function logout() {
 
 
 
-function showPopup() {
-    document.getElementById("overlay").style.display = "block";
-    document.getElementById("popup").style.display = "block";
-}
 
-function closePopup() {
-    document.getElementById("overlay").style.display = "none";
-    document.getElementById("popup").style.display = "none";
-}
 
