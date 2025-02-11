@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:5000/api"; // Backend API URL
+const API_BASE_URL = "https://todo-app-backend-rcu5.onrender.com"; // Backend API URL
 
 // ✅ Check if user is logged in
 document.addEventListener("DOMContentLoaded", () => {

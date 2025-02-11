@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = "https://todo-app-backend-rcu5.onrender.com";
 // Replace with actual backend URL
 
 let isLogin = false; // Default: Signup Form
