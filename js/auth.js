@@ -1,5 +1,4 @@
-const API_URL = "https://todo-app-backend-rcu5.onrender.com";
-// Replace with actual backend URL
+const API_URL = "https://todo-app-backend-rcu5.onrender.com"; // Backend API URL
 
 let isLogin = false; // Default: Signup Form
 
@@ -24,7 +23,7 @@ function toggleForm() {
     }
 }
 
-// ✅ Signup Function
+// ✅ Signup Function (Updated API path)
 async function signup() {
     const name = document.getElementById("name").value;
     const phone = document.getElementById("phone").value;
@@ -36,7 +35,7 @@ async function signup() {
         return;
     }
 
-    const response = await fetch(`${API_URL}/signup`, {
+    const response = await fetch(`${API_URL}/api/auth/signup`, { // 🔹 Updated path
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, phone, email, password })
@@ -51,7 +50,7 @@ async function signup() {
     }
 }
 
-// ✅ Login Function
+// ✅ Login Function (Updated API path)
 async function login() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -61,7 +60,7 @@ async function login() {
         return;
     }
 
-    const response = await fetch(`${API_URL}/login`, {
+    const response = await fetch(`${API_URL}/api/auth/login`, { // 🔹 Updated path
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
